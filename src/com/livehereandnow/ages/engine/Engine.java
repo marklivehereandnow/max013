@@ -125,12 +125,12 @@ public class Engine {
         System.out.println(" TODO   [A內政-亞歷山大圖書館 科技生產+1，文化生產+1，內政手牌上限+1，軍事手牌上限+1]  ");
       
         System.out.println();
-        System.out.println("  === ver 0.62 ===  2014-4-29, 15:45, by Mark　");
+        System.out.println("  === ver 0.64 ===  2014-4-29, 16:30, by Mark　");
         System.out.println("    1. introduce CardDeck ");
         System.out.println("    2. 軍事牌庫: cnt=46 <<< using CardDeck ");
         
         
-        System.out.println("  === ver 0.62 ===  2014-4-29, 15:45, by Mark　");
+        System.out.println("  === ver 0.63 ===  2014-4-29, 15:45, by Mark　");
         System.out.println("    1. show  內政牌庫:  remaining 時代 I:47 II:0 III:0 ");
         
         System.out.println();
