@@ -330,7 +330,7 @@ public class Card implements CardType {
 
                     return "[] ";
                 }
-                return "[" + get時代名() + get牌背名() + "-" + get卡名() + "-" + get類型Name() + "] ";
+                return "[" + get時代名() + get牌背名() + "-" + get卡名() + "-"  +get右上()+ "] ";
             case 2://[A內政-荷馬-領袖]
                 if (卡名.equalsIgnoreCase("")) {
                     return "[] ";

@@ -18,6 +18,35 @@ public class CardRow {
 
     private List<Card> ageA內政牌;
     private List<Card> ageICivilCards;
+    private List<Card> ageIICivilCards;
+    private List<Card> ageIIICivilCards;
+
+    public int getRemainingCardCount(int k) {
+        if (k == 1) {
+            return ageICivilCards.size();
+        }
+        if (k == 2) {
+            return ageIICivilCards.size();
+        }
+        if (k == 3) {
+            return ageIIICivilCards.size();
+        }
+        return -1;
+    }
+
+    public List<Card> getCivilCardBank(int k) throws AgesException {
+        if (k == 1) {
+            return ageICivilCards;
+        }
+        if (k == 2) {
+            return ageIICivilCards;
+        }
+        if (k == 3) {
+            return ageIIICivilCards;
+        }
+
+        throw new AgesException(" NOT YET DEFINE !!!");
+    }
 
     private List<Card> cardRow;
     private int playerCnt;
@@ -37,13 +66,16 @@ public class CardRow {
 
     public CardRow(int playerCnt) {
         this.playerCnt = playerCnt;
+        ageICivilCards = new ArrayList<>();
+        ageIICivilCards = new ArrayList<>();
+        ageIIICivilCards = new ArrayList<>();
 
         Cards cards = new Cards();
-    //    ageA內政牌 = cards.get時代A內政牌();
+        //    ageA內政牌 = cards.get時代A內政牌();
         ageICivilCards = cards.get某時代內政牌(1);
 
         ageA內政牌 = cards.get某時代內政牌(0);//DEBUG 暫用時代1
-      // ageA內政牌 = cards.get測試牌(1);//DEBUG 暫用時代1
+        // ageA內政牌 = cards.get測試牌(1);//DEBUG 暫用時代1
         cardRow = new ArrayList<>();
 
         Collections.shuffle(ageA內政牌);
@@ -97,18 +129,17 @@ public class CardRow {
 //            }
 //        }
         if (round >= 2) {
-          while (cardRow.size() < 13) {
+            while (cardRow.size() < 13) {
                 cardRow.add(ageICivilCards.get(0));
                 ageICivilCards.remove(0);
-                
-          }
-            System.out.println("... remaining Age I Civil Cards is "+ageICivilCards.size());
+
+            }
+            System.out.println("... remaining Age I Civil Cards is " + ageICivilCards.size());
         }
     }
 
-    
-    public void show(int style){
-      System.out.println("   === Card Row 卡牌列===");
+    public void show(int style) {
+        System.out.println("   === Card Row 卡牌列===");
         System.out.print("*  ");
         for (int k = 0; k < 5; k++) {
             System.out.print(k + cardRow.get(k).toString(style));
@@ -126,7 +157,7 @@ public class CardRow {
 //        System.out.println("\n內政牌庫:???");
 //        
     }
-    
+
 //    public void show() {
 //        System.out.println("   === Card Row ===");
 //        System.out.print("   Value 1: ");
@@ -145,5 +176,4 @@ public class CardRow {
 //        }
 //        System.out.println();
 //    }
-
 }

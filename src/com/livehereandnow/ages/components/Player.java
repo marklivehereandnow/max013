@@ -824,12 +824,16 @@ public class Player {
     public boolean doBuild(int category, int age) throws AgesException {
         table.getCard(category, age).getYellowPoints().addPoints(1);
         workPool.addPoints(-1);
-                
-        
+
         return true;
     }
-    
-    
+
+    public boolean doUpgrade(int category, int ageFrom, int ageTo) throws AgesException {
+        table.getCard(category, ageTo).getYellowPoints().addPoints(1);
+        table.getCard(category, ageFrom).getYellowPoints().addPoints(-1);
+        return true;
+    }
+
     /**
      * 三個字的指令率先實施打政府牌
      *
@@ -1046,7 +1050,7 @@ public class Player {
 //        showInitCards();
         table.show();
 
-        System.out.print("\n   手牌 (上限值="+table.getOnHandLimit()+")");
+        System.out.print("\n   手牌 (上限值=" + table.getOnHandLimit() + ")");
         showCardsOnHand();
         System.out.println("");
     }
@@ -1062,10 +1066,8 @@ public class Player {
 //        System.out.println("   Govt: " + government.toString(7));
 //
 //    }
-  
-
     public void showCardsOnHand() {
-        
+
         for (int k = 0; k < 手上的牌.size(); k++) {
             System.out.print(" " + k + 手上的牌.get(k).toString(15));
         }

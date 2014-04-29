@@ -33,7 +33,7 @@ public class Main {
 
     /**
      * design command as type 1, single word, version help status type 2,
-     * keyword + parameter, take-card 1 take 1 play-card 1 play 1
+ keyword + p1, take-card 1 take 1 play-card 1 play 1
      *
      * @param cmd
      * @return
@@ -45,8 +45,10 @@ public class Main {
         //
         int tokenCnt = 0;//命令行裡共有幾個字，給予初值為0
         String keyword = "";//指令是什麼，給予初值空字符串
-        int parameter = -1;//指令的參數是什麼，給予初值為-1，-1通常是指不能用的值
-        int parameter2 = -1;
+        int p1 = -1;//指令的參數是什麼，給予初值為-1，-1通常是指不能用的值
+        int p2 = -1;
+        int p3 = -1;
+        
         //
         // 2. parser to words 
         //
@@ -74,23 +76,29 @@ public class Main {
         }
         if (tokenCnt == 2) {//如果輸入的是2個字的話
             try {
-                parameter = Integer.parseInt(tokens.get(1));
+                p1 = Integer.parseInt(tokens.get(1));
             } catch (Exception ex) {
                 System.out.println("Parameter must be integer!");
                 return false;
             }
-            return engine.doCmd(keyword, parameter);
+            return engine.doCmd(keyword, p1);
         }
-        if (tokenCnt == 3) {//如果輸入的是2個字的話
+        
+        
+        // ver 0.62 for upgrad 3 0 1, Upgrad Farm from Age A to Age I
+        if (tokenCnt == 4) {//如果輸入的是2個字的話
             try {
-                parameter = Integer.parseInt(tokens.get(1));
-                parameter2 = Integer.parseInt(tokens.get(2));
+                p1 = Integer.parseInt(tokens.get(1));
+                p2 = Integer.parseInt(tokens.get(2));
+                p3 = Integer.parseInt(tokens.get(3));
             } catch (Exception ex) {
                 System.out.println("Parameter must be integer!");
                 return false;
             }
-            return engine.doCmd(keyword, parameter,parameter2);
+            return engine.doCmd(keyword, p1,p2,p3);
         }
+        
+        
 
         //
         System.out.println("Cureently command must be one or two words only!");

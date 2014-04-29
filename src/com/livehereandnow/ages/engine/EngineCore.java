@@ -12,6 +12,7 @@
 package com.livehereandnow.ages.engine;
 
 import com.livehereandnow.ages.components.Card;
+import com.livehereandnow.ages.components.CardDeck;
 import com.livehereandnow.ages.components.CardRow;
 import com.livehereandnow.ages.components.CardType;
 import com.livehereandnow.ages.components.Cards;
@@ -36,9 +37,9 @@ public class EngineCore {
 //    private List<Card> ageA內政牌;
 //    private List<Card> old___cardRow;
     int[] CARD_POINT = {1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3};
-
+    private CardDeck militaryDeck;
     private CardRow cardRow;
-     private Cards cards;
+//    private Cards cards;
 //  待優化  
 //    private List<Card> 玩家1手牌;
 //    private List<Card> 玩家1桌牌;
@@ -94,12 +95,14 @@ public class EngineCore {
 //    public List<Card> getAgeA內政牌() {
 //        return ageA內政牌;
 //    }
-    public boolean doStatus() {
+    public boolean doStatus() throws AgesException {
 
         cardRow.show(1);
         System.out.println("\n   === 牌庫" + " === ");
-        System.out.println("內政牌庫:目前是時代I共有???張");
-        System.out.println("軍事牌庫:目前是時代I共有???張");
+        System.out.print("內政牌庫:  cnt 時代 I:"+cardRow.getRemainingCardCount(1));
+        System.out.print(" II:"+cardRow.getRemainingCardCount(2));
+        System.out.println(" III:"+cardRow.getRemainingCardCount(3));
+        System.out.println("軍事牌庫: cnt="+militaryDeck.getCardCount());
         System.out.println("   === 事件" + " === ");
         System.out.println("未來事件:0 ----");
         System.out.println("當前事件:4 AAAA");
@@ -147,10 +150,9 @@ public class EngineCore {
 //        // ver 0.40
 //        this.get當前玩家().getCivilCounter().setPoint(get當前玩家().getCurrentGovernment().getWhite().getPoints());//把當前玩家的內政點數，設定為當前玩家政府的上表示的內政點數
 //        this.get當前玩家().getMilitaryCounter().setPoint(get當前玩家().getCurrentGovernment().getRedPoints().getPoints());
-         // ver 0.41 回合開始 補充玩家的內政和軍事點數，應該將功能直接做到Player去
+        // ver 0.41 回合開始 補充玩家的內政和軍事點數，應該將功能直接做到Player去
         //希望有個指令像是get當前玩家().startRound()
         get當前玩家().doStartRound();
-     
 
         // addCard
         if (roundNum >= 2) {
@@ -169,6 +171,9 @@ public class EngineCore {
     }
 
     public void init() throws AgesException {
+        militaryDeck=new CardDeck();
+        militaryDeck.getList().addAll(new Cards().get某時代軍事牌(1));
+        
         玩家[0] = new Player();
         玩家[1] = new Player();
         玩家[2] = new Player();
@@ -186,7 +191,7 @@ public class EngineCore {
 
         玩家[0].getMilitaryCounter().setPoint(33);//DEBUG 方便測試
         玩家[0].getCivilCounter().setPoint(99);//DEBUG 方便測試
-        
+
         cardRow = new CardRow(玩家人數);
 
         System.out.println("   ========================");
@@ -196,7 +201,6 @@ public class EngineCore {
         this.doStatus();
     }
 
-    
     public boolean doSetCulture(int k) {
 //        玩家[當前玩家ID - 1].get點數().set文化(k);
         return true;
@@ -210,18 +214,20 @@ public class EngineCore {
         return true;
     }
 
-      public boolean doDebug() throws AgesException {
-          System.out.println("手牌上限值的定義，為當前板塊上的內政點數和，由Cards列出所有相關的牌");
+    public boolean doDebug() throws AgesException {
+        System.out.println("手牌上限值的定義，為當前板塊上的內政點數和，由Cards列出所有相關的牌");
 //          cards.show和手牌數相關的牌();
-          Cards xxx=new Cards();
-          System.out.println("----------------------------------------------");
-          xxx.show和手牌數相關的牌();
-          return true;
+        Cards xxx = new Cards();
+        System.out.println("----------------------------------------------");
+        xxx.show和手牌數相關的牌();
+        return true;
     }
+
     public boolean doIncreasePopulation() throws AgesException {
         return get當前玩家().doIncreasePolutaion();
     }
-public boolean doRevolution() throws AgesException {
+
+    public boolean doRevolution() throws AgesException {
         return get當前玩家().doRevolution();
     }
 
@@ -245,13 +251,23 @@ public boolean doRevolution() throws AgesException {
 
         return true;
     }
-    public boolean doPlayCard(int k,int k2) throws AgesException {
-        get當前玩家().doPlayCard(k,k2);
+
+    public boolean doPlayCard(int k, int k2) throws AgesException {
+        get當前玩家().doPlayCard(k, k2);
 
         return true;
     }
-public boolean doBuild(int k,int k2) throws AgesException {
-        get當前玩家().doBuild(k,k2);
+
+     public boolean doUpgrade(int p1, int p2, int p3) throws AgesException {
+        get當前玩家().doUpgrade(p1,p2,p3);
+
+        return true;
+    }
+
+   
+    
+    public boolean doBuild(int k, int k2) throws AgesException {
+        get當前玩家().doBuild(k, k2);
 
         return true;
     }
@@ -287,11 +303,10 @@ public boolean doBuild(int k,int k2) throws AgesException {
 //        Card card = old___cardRow.get(k);
         int cardPoint = CARD_POINT[k];
         Card card = cardRow.getCards().get(k);
-        
+
         //ver 0.55
         card.setRound(this.roundNum);
-        
-        
+
 //        if (card.get卡名().length() == 0) {
 //            System.out.println("This card has been taken! ***Nothing happened***");
 //            return true;
@@ -318,8 +333,8 @@ public boolean doBuild(int k,int k2) throws AgesException {
         System.out.println("\n=== basic commands === (start)");
         System.out.println("population  ");
         System.out.println("   help         this command");
-         System.out.println(" revolution 革命!");
-          System.out.println(" change-government 和平轉移政權");
+        System.out.println(" revolution 革命!");
+        System.out.println(" change-government 和平轉移政權");
         System.out.println("   take-card X  take number X card, X is 0 base");
         System.out.println("   change-turn  change player's turn");
         System.out.println("   status       to show current game status");

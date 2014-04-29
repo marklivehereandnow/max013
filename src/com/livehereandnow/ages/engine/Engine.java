@@ -89,10 +89,10 @@ public class Engine {
         }
     }
 
-    public boolean doCmd(String keyword, int parameter, int parameter2) throws IOException, AgesException {
+    public boolean doCmd(String keyword, int p1, int p2) throws IOException, AgesException {
         switch (keyword) {
             case "build":
-                return core.doBuild(parameter, parameter2);
+                return core.doBuild(p1, p2);
 
             
             case "打":
@@ -100,7 +100,7 @@ public class Engine {
             case "play":
             case "play-card":
             case "out-card":
-                return core.doPlayCard(parameter, parameter2);
+                return core.doPlayCard(p1, p2);
 
             default:
                 System.out.println("Unknown keyword, " + keyword);
@@ -108,13 +108,38 @@ public class Engine {
         }
     }
 
+      public boolean doCmd(String keyword, int p1, int p2, int p3) throws IOException, AgesException {
+        switch (keyword) {
+            case "upgrade":
+                return core.doUpgrade(p1, p2, p3);
+
+            default:
+                System.out.println("Unknown keyword, " + keyword);
+                return false;
+        }
+    }
+
+    
+    
     public boolean doVersion() {
         System.out.println(" TODO   [A內政-亞歷山大圖書館 科技生產+1，文化生產+1，內政手牌上限+1，軍事手牌上限+1]  ");
-
+      
         System.out.println();
-//                System.out.println("  === ver 0.60 ===  2014-4-29, 12:13, by Max　");
-//        System.out.println("    1. 新增DEBUG指令完成 ");
-//        System.out.println("    2.手牌上限值的定義，為當前板塊上的內政點數和");
+        System.out.println("  === ver 0.62 ===  2014-4-29, 15:45, by Mark　");
+        System.out.println("    1. introduce CardDeck ");
+        System.out.println("    2. 軍事牌庫: cnt=46 <<< using CardDeck ");
+        
+        
+        System.out.println("  === ver 0.62 ===  2014-4-29, 15:45, by Mark　");
+        System.out.println("    1. show  內政牌庫:  remaining 時代 I:47 II:0 III:0 ");
+        
+        System.out.println();
+        System.out.println("  === ver 0.62 ===  2014-4-29, 15:45, by Mark　");
+        System.out.println("    1. implement upgrad 3 0 1, Upgrad Farm from Age A to Age I ");
+        System.out.println("    2. new doCmd with 3 parameters");
+       
+        
+        System.out.println();
         System.out.println("  === ver 0.61 ===  2014-4-29, 15:30, by Mark　");
         System.out.println("    1. add command build x y, for 實驗室/神廟/農場/礦山/步兵  ");
         System.out.println("    2. implement build x y, to affect 黃點 only ");

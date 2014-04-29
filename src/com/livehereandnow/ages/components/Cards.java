@@ -97,24 +97,35 @@ public class Cards implements CardType {
         return list;
     }
 
-    public List<Card> get時代A內政牌() {
-        List<Card> 時代A內政牌 = new ArrayList<>();
-        for (int k = 0; k < cards.size(); k++) {
-            if ((cards.get(k).get時代() == 0) && (cards.get(k).get牌背() == 內政)) {
-                時代A內政牌.add(cards.get(k));
-            }
-        }
-        return 時代A內政牌;
-    }
+//    public List<Card> get時代A內政牌() {
+//        List<Card> 時代A內政牌 = new ArrayList<>();
+//        for (int k = 0; k < cards.size(); k++) {
+//            if ((cards.get(k).get時代() == 0) && (cards.get(k).get牌背() == 內政)) {
+//                時代A內政牌.add(cards.get(k));
+//            }
+//        }
+//        return 時代A內政牌;
+//    }
 
     public List<Card> get某時代內政牌(int age) {
-        List<Card> 內政牌 = new ArrayList<>();
+        List<Card> list = new ArrayList<>();
         for (int k = 0; k < cards.size(); k++) {
             if ((cards.get(k).get時代() == age) && (cards.get(k).get牌背() == 內政)) {
-                內政牌.add(cards.get(k));
+                list.add(cards.get(k));
             }
         }
-        return 內政牌;
+        return list;
+    }
+
+        public List<Card> get某時代軍事牌(int age) {
+        List<Card> list = new ArrayList<>();
+        for (int k = 0; k < cards.size(); k++) {
+            if ((cards.get(k).get時代() == age) && (cards.get(k).get牌背() == 軍事)) {
+                System.out.println(" military => "+cards.get(k).toString(1));
+                list.add(cards.get(k));
+            }
+        }
+        return list;
     }
 
     public List<Card> get測試牌(int test) {

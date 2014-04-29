@@ -22,14 +22,14 @@ package com.livehereandnow.ages.components;
 //    礦場跟農業的需求其實一樣
 //    其他科技仍然可以直接使用，不用藍點即可
 //    每個物件要能記錄黃點、藍點、是否拿取、是否打出
-public class Agriculture {
+public class XXXAgriculture {
 
     private int 黃點;
     private int 藍點;
     private boolean 拿取;
     private boolean 打出;
 
-    public Agriculture(int 黃點, int 藍點, boolean 拿取, boolean 打出) {
+    public XXXAgriculture(int 黃點, int 藍點, boolean 拿取, boolean 打出) {
         this.黃點 = 黃點;
         this.藍點 = 藍點;
         this.拿取 = 拿取;
