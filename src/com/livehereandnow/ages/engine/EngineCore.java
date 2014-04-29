@@ -250,6 +250,11 @@ public boolean doRevolution() throws AgesException {
 
         return true;
     }
+public boolean doBuild(int k,int k2) throws AgesException {
+        get當前玩家().doBuild(k,k2);
+
+        return true;
+    }
 
     /**
      * 1. take card

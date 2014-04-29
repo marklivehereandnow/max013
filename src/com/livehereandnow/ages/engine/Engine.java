@@ -91,6 +91,10 @@ public class Engine {
 
     public boolean doCmd(String keyword, int parameter, int parameter2) throws IOException, AgesException {
         switch (keyword) {
+            case "build":
+                return core.doBuild(parameter, parameter2);
+
+            
             case "打":
             case "out":
             case "play":
@@ -111,6 +115,10 @@ public class Engine {
 //                System.out.println("  === ver 0.60 ===  2014-4-29, 12:13, by Max　");
 //        System.out.println("    1. 新增DEBUG指令完成 ");
 //        System.out.println("    2.手牌上限值的定義，為當前板塊上的內政點數和");
+        System.out.println("  === ver 0.61 ===  2014-4-29, 15:30, by Mark　");
+        System.out.println("    1. add command build x y, for 實驗室/神廟/農場/礦山/步兵  ");
+        System.out.println("    2. implement build x y, to affect 黃點 only ");
+        System.out.println("");
         System.out.println("  === ver 0.60 ===  2014-4-29, 15:00, by Mark　");
         System.out.println("    1. add played[] to LeaderDeck  領袖 [A內政-漢摩拉比 內政點數+1，軍事點數-1]  taken:**23 played:*123 ");
         System.out.println("    2. show  手牌上限值=5");

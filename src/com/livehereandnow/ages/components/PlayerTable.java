@@ -74,7 +74,7 @@ public class PlayerTable extends Object {
             white = card.getWhite().getPoints();
             if (white > 0) {
                 k += white;
-                System.out.println("  ..." + card.toString(10));
+//                System.out.println("  ..." + card.toString(10));
             }
         }
         return k;
@@ -231,11 +231,11 @@ public class PlayerTable extends Object {
 
     private void showAgesX5() {
 
-        showAgesX5("  實驗室", cards實驗室);
-        showAgesX5("  神廟", cards神廟);
-        showAgesX5("  農場", cards農場);
-        showAgesX5("  礦山", cards礦山);
-        showAgesX5("  步兵", cards步兵);
+        showAgesX5("  1.實驗室", cards實驗室);
+        showAgesX5("  2.神廟", cards神廟);
+        showAgesX5("  3.農場", cards農場);
+        showAgesX5("  4.礦山", cards礦山);
+        showAgesX5("  5.步兵", cards步兵);
 
     }
 
